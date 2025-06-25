@@ -1,0 +1,209 @@
+/* Minimalistic, light, centered Tic Tac Toe SPA
+   Color Palette: primary #1976d2, secondary #424242, accent #ffeb3b
+*/
+
+/* BASE: root color tokens */
+:root {
+  --ttt-bg: #f5f7fa;
+  --ttt-panel: #fff;
+  --ttt-board-border: #e5e5e5;
+  --ttt-primary: #1976d2;
+  --ttt-secondary: #424242;
+  --ttt-accent: #ffeb3b;
+  --ttt-border-radius: 16px;
+  --ttt-shadow: 0 6px 32px 0 rgba(40,40,80,.08), 0 1.5px 3px 0 rgba(0,0,0,.035);
+  --ttt-x-col: #1976d2;
+  --ttt-o-col: #424242;
+  --ttt-draw-col: #bababa;
+  --ttt-footer-bg: #f8f8f8;
+  --ttt-gap: 1.4rem;
+}
+html, body {
+  background: var(--ttt-bg);
+  color: var(--ttt-o-col);
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+body {
+  margin: 0;
+}
+
+/* Root layout */
+.ttt-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--ttt-bg);
+  text-align: center;
+}
+
+/* Header */
+.ttt-header {
+  width: 100vw;
+  padding-top: 1.8em;
+  padding-bottom: 0.3em;
+  background: transparent;
+}
+.ttt-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin: 0.2em 0 0 0;
+  letter-spacing: 0.05em;
+}
+.ttt-subtitle {
+  font-size: 1rem;
+  opacity: 0.77;
+  margin-bottom: 0.8em;
+}
+
+.ttt-content {
+  /* Center content including game */
+  flex: 1 1 auto;
+  min-height: 64vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto;
+  gap: var(--ttt-gap);
+}
+
+/* Scoreboard */
+.ttt-scoreboard {
+  margin-bottom: 0.2em;
+  display: flex;
+  gap: 1.2em;
+  justify-content: center;
+}
+
+/* Score chips */
+.sb-chip {
+  padding: 0.32em 1.1em;
+  border-radius: 17px;
+  font-size: 1.01em;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  background: #eee;
+  min-width: 66px;
+  display: inline-block;
+}
+.x-score {
+  border: 1.5px solid var(--ttt-primary);
+  background: rgba(25, 118, 210, 0.12);
+}
+.o-score {
+  border: 1.5px solid var(--ttt-secondary);
+  background: rgba(66,66,66,0.12);
+}
+
+/* Board styles */
+.ttt-board {
+  margin: 1.08em auto 0 auto;
+  background: var(--ttt-panel);
+  border-radius: var(--ttt-border-radius);
+  box-shadow: var(--ttt-shadow);
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  padding: 1.2em 1.4em;
+  border: 2.5px solid var(--ttt-board-border);
+  gap: 0.18em;
+}
+.ttt-row {
+  display: flex;
+}
+.ttt-square {
+  width: 66px;
+  height: 66px;
+  margin: 0.3em;
+  font-size: 2.15rem;
+  font-weight: 600;
+  background: #fff;
+  border: 2.2px solid #e0e0e0;
+  border-radius: 11px;
+  transition: background 0.15s, border-color 0.22s, box-shadow 0.18s;
+  box-shadow: none;
+  cursor: pointer;
+  outline: none;
+  color: var(--ttt-x-col); /* Dynamic via inline */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ttt-square:focus-visible {
+  border: 2.2px solid var(--ttt-accent);
+  box-shadow: 0 0 0 1px var(--ttt-accent);
+}
+.ttt-square:disabled {
+  background: #f6f6f6;
+  cursor: not-allowed;
+  opacity: 0.92;
+}
+
+/* Game status & winner/draw */
+.ttt-status {
+  font-size: 1.08rem;
+  font-weight: 500;
+  margin-bottom: 0.7em;
+  min-height: 2em;
+}
+.ttt-status .winner {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.ttt-status .draw {
+  font-weight: 600;
+}
+
+/* Restart button */
+.ttt-reset-btn {
+  margin: 1.38em auto 0 auto;
+  display: block;
+  border: none;
+  border-radius: 12px;
+  background: var(--ttt-accent);
+  color: var(--ttt-secondary);
+  font-weight: 800;
+  font-size: 1.09rem;
+  padding: 0.58em 1.8em;
+  letter-spacing: 0.04em;
+  box-shadow: 0 1.2px 12px 0 rgba(80,70,20,0.05);
+  cursor: pointer;
+  transition: filter 0.13s, background 0.17s;
+}
+.ttt-reset-btn:hover, .ttt-reset-btn:focus-visible {
+  background: #fff29b;
+  filter: brightness(0.94);
+  outline: 1.8px solid var(--ttt-accent);
+}
+.ttt-reset-btn:active {
+  filter: brightness(0.97);
+}
+
+/* Footer */
+.ttt-footer {
+  width: 100vw;
+  text-align: center;
+  padding: 1.2em 0 0.9em 0;
+  background: var(--ttt-footer-bg);
+  font-size: 0.97em;
+  color: var(--ttt-secondary);
+  opacity: 0.85;
+  border-top: 1px solid #eee;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .ttt-board {
+    padding: 0.7em 0.5em;
+  }
+  .ttt-square {
+    width: 42px;
+    height: 42px;
+    font-size: 1.36rem;
+  }
+  .ttt-title {
+    font-size: 1.32rem;
+  }
+}
