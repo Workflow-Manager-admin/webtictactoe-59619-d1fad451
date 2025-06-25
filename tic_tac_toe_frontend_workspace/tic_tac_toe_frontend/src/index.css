@@ -1,3 +1,10 @@
+/* 
+  Global styles for the React Tic Tac Toe application.
+
+  This file sets base typography, resets margins, and provides universal
+  CSS defaults for the overall application interface.
+*/
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
